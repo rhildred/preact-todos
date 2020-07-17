@@ -1,6 +1,13 @@
-import { html, Component, render } from 'https://unpkg.com/htm/preact/standalone.module.js';
+import { html, Component, render } from "https://unpkg.com/htm/preact/standalone.module.js";
+import "https://cdnjs.cloudflare.com/ajax/libs/firebase/7.16.0/firebase-app.min.js";
+import "https://cdnjs.cloudflare.com/ajax/libs/firebase/7.16.0/firebase-database.min.js";
+import config from "./firebase.js";
 
 class App extends Component {
+  constructor(){
+    super();
+    firebase.initializeApp(config);
+  }
   addTodo() {
     const { todos = [] } = this.state;
     this.setState({ todos: todos.concat(`Item ${todos.length}`) });
