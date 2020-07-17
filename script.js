@@ -7,10 +7,15 @@ class App extends Component {
   constructor(){
     super();
     firebase.initializeApp(config);
+    this.state = { value: '' };
   }
+  onInput(e){
+    this.value = e.target.value;
+  }
+
   addTodo() {
     const { todos = [] } = this.state;
-    this.setState({ todos: todos.concat(`Item ${todos.length}`) });
+    this.setState({ todos: todos.concat(`Item ${todos.length} ${this.value}`) });
   }
   render({ page }, { todos = [] }) {
     return html`
@@ -21,6 +26,7 @@ class App extends Component {
                 <li key="${todo}">${todo}</li>
               `)}
             </ul>
+            <input type="text" onInput=${() => this.onInput(event)} />
             <button onClick=${() => this.addTodo()}>Add Todo</button>
             <${Footer}>footer content here<//>
           </div>
